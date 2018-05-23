@@ -57,7 +57,7 @@ OverpassAPI.prototype.getCurrentSequence = function () {
 OverpassAPI.prototype.getSequenceByTime = function (timestamp, callback) {
     var osmBase = moment.utc(timestamp).format('YYYY-MM-DDTHH[\\]:mm[\\]:ss\\Z');
     console.log('load time: ' + osmBase);
-    var url = 'https://overpass-api.de/api/augmented_state_by_date?osm_base=' + osmBase;
+    var url = 'https://overpass.kumi.systems/api/augmented_state_by_date?osm_base=' + osmBase;
     console.log('requesting state ' + url);
     OpenLayers.Request.GET({
         url: url,
@@ -82,7 +82,7 @@ OverpassAPI.prototype.loadByUrl = function(url) {
 OverpassAPI.prototype.load = function(sequence, postLoadCallback) {
     var bboxParam;
     if (sequence && sequence >= 0) {
-        var url = "https://overpass-api.de/api/augmented_diff?id=" + sequence + "&info=no";
+        var url = "https://overpass.kumi.systems/api/augmented_diff?id=" + sequence + "&info=no";
         //var url = getSequenceUrl(sequence);
         if (!this.bbox) {
             this.bbox = this.bboxControl.addBBoxFromViewPort();
@@ -117,7 +117,7 @@ OverpassAPI.prototype.loadDiff = function(from, to, relations, query, postLoadCa
     }
     dateRange = '"' + mindate + '"' + maxdate;
 
-    var data_url = 'https://overpass-api.de/api/interpreter';    
+    var data_url = 'https://overpass.kumi.systems/api/interpreter';
     if(!query) {
         query = '(node(bbox)(changed);way(bbox)(changed);' + (relations ? 'relation(bbox)(changed);' : '') + ');';
     }
